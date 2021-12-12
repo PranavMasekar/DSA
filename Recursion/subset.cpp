@@ -37,9 +37,11 @@ int main()
     string s = "abc";
     // subset("",s);
     vector<string> ans = returnsubset("", s);
+    sort(ans.begin(),ans.end());
+    ans.erase(ans.begin());
     for (int i = 0; i < ans.size(); i++)
     {
-        cout << ans[i] << endl;
+        cout << ans[i] << " ";
     }
     return 0;
 }
