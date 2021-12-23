@@ -44,6 +44,7 @@ int knapsackDP(int wt[], int val[], int W, int n){
             if(i==0 || j==0) T[i][j] = 0;
         }
     };
+    // i represent length of the array and j represents the weitght of the knapsack.
     for(int i=1;i<n+1;i++){
         for(int j=1;j<W+1;j++){
             if (wt[i - 1] <= j){
@@ -63,6 +64,7 @@ int main()
     int wt[] = {10, 20, 30};
     int W = 50;
     int n = 3;
+    // cout<<knapsackRecursive(wt,val,W,n);
     // for (int i = 0; i < n+1; i++)
     // {
     //     for (int j = 0; j < W+1; j++)
@@ -70,7 +72,7 @@ int main()
     //         T[i][j] = -1;
     //     }
     // }
-    // cout<<knapsackRecursive(wt,val,W,n);
+    // cout<<knapsackMemoization(wt,val,W,n);
     cout << knapsackDP(wt, val, W, n);
     return 0;
 }
