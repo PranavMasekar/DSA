@@ -2,7 +2,7 @@
 using namespace std;
 
 bool t[100][100];
-bool SubsetMemo(vector<int> &arr, int sum, int n)
+bool EqualSumPartitionMemo(vector<int> &arr, int sum, int n)
 {
     if (sum == 0)
         return true;
@@ -15,16 +15,16 @@ bool SubsetMemo(vector<int> &arr, int sum, int n)
     {
         if (arr[n - 1] <= sum)
         {
-            return t[n][sum] = SubsetMemo(arr, sum - arr[n - 1], n - 1) || SubsetMemo(arr, sum, n - 1);
+            return t[n][sum] = EqualSumPartitionMemo(arr, sum - arr[n - 1], n - 1) || EqualSumPartitionMemo(arr, sum, n - 1);
         }
         else
         {
-            return t[n][sum] = SubsetMemo(arr, sum, n - 1);
+            return t[n][sum] = EqualSumPartitionMemo(arr, sum, n - 1);
         }
     }
 }
 
-bool SubsetSumDP(vector<int> &arr, int sum, int n)
+bool EqualSumPartitionDP(vector<int> &arr, int sum, int n)
 {
     bool t[n + 1][sum + 1];
     for (int i = 0; i <= n + 1; i++)
@@ -57,10 +57,19 @@ bool SubsetSumDP(vector<int> &arr, int sum, int n)
 
 int main()
 {
-    vector<int> arr = {2, 3, 7, 8, 10};
-    int sum = 29;
-    int n = 5;
-    // cout<<SubsetSumDP(arr,sum,n);
+    vector<int> arr = {1,5,5,1};
+    int sum = 0;
+    int n = 4;
+    for(int i=0;i<n;i++){
+        sum += arr[i];
+    }  
+    if(sum%2!=0){
+        cout<<"Eqaul Sum Partition is not possible";
+    }
+    else{
+    // DP approach
+    cout<<EqualSumPartitionDP(arr,sum,n)<<endl;
+    // Memoization approach
     for (int i = 0; i < n + 1; i++)
     {
         for (int j = 0; j < sum + 1; j++)
@@ -68,6 +77,8 @@ int main()
             t[i][j] = false;
         }
     }
-    cout << SubsetMemo(arr, sum, n);
+    cout << EqualSumPartitionMemo(arr, sum, n);
+    }
+    
     return 0;
 }
