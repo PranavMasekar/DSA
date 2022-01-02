@@ -6,10 +6,11 @@ bool SubsetMemo(vector<int> &arr, int sum, int n)
 {
     if (sum == 0)
         return true;
-    if(n==0) return false;
+    if (n == 0)
+        return false;
     if (sum < 0)
         return false;
-    if (t[n-1][sum] != false)
+    if (t[n][sum] != false)
         return t[n][sum];
     else
     {
@@ -58,7 +59,7 @@ bool SubsetSumDP(vector<int> &arr, int sum, int n)
 int main()
 {
     vector<int> arr = {2, 3, 7, 8, 10};
-    int sum = 29;
+    int sum = 30;
     int n = 5;
     // cout<<SubsetSumDP(arr,sum,n);
     for (int i = 0; i < n + 1; i++)
