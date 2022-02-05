@@ -61,7 +61,7 @@ int main()
     vector<int> arr = {2, 3, 7, 8, 10};
     int sum = 30;
     int n = 5;
-    // cout<<SubsetSumDP(arr,sum,n);
+    cout<<SubsetSumDP(arr,sum,n);
     for (int i = 0; i < n + 1; i++)
     {
         for (int j = 0; j < sum + 1; j++)
