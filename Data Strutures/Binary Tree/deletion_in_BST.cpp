@@ -73,12 +73,12 @@ void insert(struct node *root, int key){
            root = root->right;
        }
    }
-   struct node* new = createNode(key);
+   struct node* newNode = createNode(key);
    if(key<prev->data){
-       prev->left = new;
+       prev->left = newNode;
    }
    else{
-       prev->right = new;
+       prev->right = newNode;
    }
 
 }
@@ -91,7 +91,7 @@ struct node * inOrderPredecessor(struct node * root){
     return root;
 }
 
-struct Node * deletion(struct node * root , int value){
+struct node * deletion(struct node * root , int value){
     struct node * inpre;
     if(root==NULL){
         return NULL;

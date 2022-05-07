@@ -63,12 +63,12 @@ void insert(struct node *root, int key){
            root = root->right;
        }
    }
-   struct node* new = createNode(key);
+   struct node* newNode = createNode(key);
    if(key<prev->data){
-       prev->left = new;
+       prev->left = newNode;
    }
    else{
-       prev->right = new;
+       prev->right = newNode;
    }
 
 }
