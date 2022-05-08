@@ -11,49 +11,22 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-// Incomplete
-// TODO:
-
 class Solution {
 public:
-    int maxDepth = 0;
-    void traverse(TreeNode* root,vector<int>& leaves){
-        if (root != NULL)
-        {
-            traverse(root->left, leaves);
-            if(root->left==NULL && root->right==NULL) leaves.push_back(root->val);
-            traverse(root->right, leaves);
-        }
+    int maxDepth(TreeNode* root) {
+        if (root==NULL) return 0;
+        return 1 + max(maxDepth(root->left) , maxDepth(root->right));
     }
-    int depth(TreeNode* root,int val,int x){
-        if(root==NULL) return 0;
-        if(root->left==NULL && root->right==NULL){
+    int solution(TreeNode* root , int currentHeight , int maxHeight){
+        if (root==NULL) return 0;
+        int sum = 0;
+        if(currentHeight == maxHeight) sum += root->val;
 
-        if(root->val==val) return x;
-        }
-        int left =  depth(root->left,val,x +1);
-        if(left!=0) return left;
-        int right = depth(root->right,val,x +1);
-        return right;
+        return sum + solution(root->left,currentHeight+1,maxHeight) + solution(root->right,currentHeight+1,maxHeight); 
     }
     int deepestLeavesSum(TreeNode* root) {
-        map<int,int> map;
-        vector<int> leaves;
-        traverse(root,leaves);
-        for(int i=0;i<leaves.size();i++){
-            map[leaves[i]] = depth(root,leaves[i],1);
-        }
-        int res = 0;
-        for(auto it : map){
-            maxDepth = max(maxDepth,it.second);
-        }
-        for(auto it : map){
-            cout<<it.second<<endl;
-            if(it.second==maxDepth){
-                res += it.first;
-            }
-        }
-        return res;
+        int maxHeight = maxDepth(root);
+        return solution(root,1,maxHeight);
     }
 };
 

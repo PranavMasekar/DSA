@@ -16,29 +16,36 @@ struct TreeNode
 class Solution
 {
 public:
-    int calculate(TreeNode *root)
-    {
-        if (root == NULL)
-            return 0;
-        return root->val +
-               calculate(root->left) +
-               calculate(root->right);
+    map<int,int> ans;
+    int totalCost(TreeNode* root){
+        if(root==NULL) return 0;
+        else return root->val + totalCost(root->left) + totalCost(root->right);
     }
-    void FormGST(TreeNode *root , TreeNode* parent , bool isLeft)
+    void Inorder(TreeNode *root, vector<int> &ans)
     {
         if (root != NULL)
         {
-            root->val += calculate(root->right);
-            if(isLeft){
-                root->val += parent->val;
-            }
-            FormGST(root->left,root,true);
-            FormGST(root->right,root,false);
+            Inorder(root->left, ans);
+            ans.push_back(root->val);
+            Inorder(root->right, ans);
         }
     }
-    TreeNode *bstToGst(TreeNode *root)
-    {
-        FormGST(root,root,false);
+    void form(TreeNode* root){
+        if(root!=NULL){
+            form(root->left);
+            root->val = ans[root->val];
+            form(root->right);
+        }
+    }
+    TreeNode *bstToGst(TreeNode *root) {
+        int sum = totalCost(root);
+        vector<int> values;
+        Inorder(root,values);
+        for(int i=0;i<values.size();i++){
+            ans[values[i]] = sum;
+            sum -= values[i];
+        }
+        form(root);
         return root;
     }
 };
