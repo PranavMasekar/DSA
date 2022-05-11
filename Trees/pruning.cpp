@@ -10,7 +10,7 @@ struct TreeNode
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
-
+// Incomplete
 class Solution {
     TreeNode* newRoot;
     TreeNode* temp;
@@ -24,16 +24,26 @@ class Solution {
         if(root->left!=NULL && !isValid(root->left)){
             myRoot->left = NULL;
         }
-        else myRoot->left = root->left;
+        else {
+            TreeNode* newNode = new TreeNode(root->val);
+            myRoot->left = newNode;
+        }
+       
         if(root->right!=NULL && !isValid(root->right)){
             myRoot->right = NULL;
         }
-        else myRoot->right = root->right;
+        else {
+            TreeNode* newNode = new TreeNode(root->val);
+            myRoot->right = newNode;
+        }
+        solve(root->left,myRoot->left);
+        solve(root->right,myRoot->right);
     }
 public:
     TreeNode* pruneTree(TreeNode* root) {
         if(root==NULL) return root;
-        newRoot = root;
+        TreeNode* newNode = new TreeNode(root->val);
+        newRoot = newNode;
         temp = root;
         solve(root,temp);
         return newRoot;
