@@ -4,17 +4,17 @@ const int N = 1e5+10;
 
 vector<int> g[N];
 
-void DFS(int vertex,vector<bool>& visit){
-    //Actions on vertex after entering
-    cout<<vertex<<endl;
-    visit[vertex] = true;
-    for(int childs : g[vertex]){
+void DFS(int current,vector<bool>& visit){
+    //Actions on current after entering
+    cout<<current<<endl;
+    visit[current] = true;
+    for(int child : g[current]){
         // Action on child node before visiting child node
-        if(visit[childs]) continue;
-        DFS(childs,visit);
+        if(visit[child]) continue;
+        DFS(child,visit);
         // Action on child node after visiting child node
     }
-    //Action on vertex before leaving the vertex 
+    //Action on current before leaving the current 
 }
 
 

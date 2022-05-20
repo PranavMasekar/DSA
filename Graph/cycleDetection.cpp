@@ -4,16 +4,16 @@ const int N = 1e5+10;
 
 vector<int> g[N];
 
-bool DFS(int vertex,vector<bool>& visit,int parent){
-    // Starting DFS for vertex
+bool DFS(int current,vector<bool>& visit,int parent){
+    // Starting DFS for current
     bool doesExits = false;
-    visit[vertex] = true;
-    for(int child : g[vertex]){
+    visit[current] = true;
+    for(int child : g[current]){
         // Parent cycle check
         if(visit[child] && child==parent) continue;
         // If already visited then
         if(visit[child]) return true;
-        doesExits |=DFS(child,visit,vertex);
+        doesExits |=DFS(child,visit,current);
     }
     return doesExits;
 }

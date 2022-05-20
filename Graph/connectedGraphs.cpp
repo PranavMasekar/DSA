@@ -4,9 +4,9 @@ const int N = 1e5+10;
 
 vector<int> g[N];
 
-void DFS(int vertex,vector<bool>& visit){
-    visit[vertex] = true;
-    for(int child : g[vertex]){
+void DFS(int current,vector<bool>& visit){
+    visit[current] = true;
+    for(int child : g[current]){
         if(visit[child]) continue;
         DFS(child,visit);
     }

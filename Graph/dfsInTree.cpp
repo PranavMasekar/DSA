@@ -5,16 +5,16 @@ const int N = 1e5+10;
 int depth[N],height[N];
 vector<int> g[N];
 
-void DFS(int vertex,int parent){
-    //Actions on vertex after entering
-    cout<<vertex<<endl;
-    for(int childs : g[vertex]){
+void DFS(int current,int parent){
+    //Actions on current after entering
+    cout<<current<<endl;
+    for(int childs : g[current]){
         // Action on child node before visiting child node
         if(childs==parent) continue;
-        DFS(childs,vertex);
+        DFS(childs,current);
         // Action on child node after visiting child node
     }
-    //Action on vertex before leaving the vertex 
+    //Action on current before leaving the current 
 }
 
 
