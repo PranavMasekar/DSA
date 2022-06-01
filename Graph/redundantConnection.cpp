@@ -24,8 +24,8 @@ public:
             G[i].push_back(j);
             G[j].push_back(i);
             if(DFS(G,1,visit,1)){
-                G[i].pop_back();
-                G[j].pop_back();
+                // G[i].pop_back();
+                // G[j].pop_back();
                 ans = edge;
             }
         }
