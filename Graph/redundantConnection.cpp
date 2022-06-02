@@ -1,9 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-// Not solved yet
 class Solution {
-    bool DFS(vector<int> G[],int current,vector<bool>& visit,int parent){
+    bool DFS(vector<int> G[],int current,vector<bool> visit,int parent){
     bool doesExits = false;
     visit[current] = true;
     for(int child : G[current]){
@@ -23,9 +22,9 @@ public:
             int i = edge[0],j = edge[1];
             G[i].push_back(j);
             G[j].push_back(i);
-            if(DFS(G,1,visit,1)){
-                // G[i].pop_back();
-                // G[j].pop_back();
+            if(DFS(G,i,visit,i)){
+                G[i].pop_back();
+                G[j].pop_back();
                 ans = edge;
             }
         }

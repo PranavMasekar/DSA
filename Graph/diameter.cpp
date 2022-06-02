@@ -5,7 +5,7 @@ const int N = 1e5+10;
 vector<int> g[N];
 int depth[N];
 
-void DFS(int current,int parent=-1){\
+void DFS(int current,int parent=-1){
     for(int child : g[current]){
         if(child==parent) continue;
         depth[child] = depth[current] + 1;
