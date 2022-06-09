@@ -1,32 +1,37 @@
 #include<bits/stdc++.h>
 using namespace std;
+
 class Solution {
-    bool DFS(vector<int> G[],vector<bool>&visit,int current){
-        if(visit[current]) return false;
-        if(G[current].empty()) return true;
+    void DFS(vector<int> G[],vector<bool>&visit,int current,set<int>&ans){
+        if(visit[current]) return;
+        if(G[current].empty()){
+            ans.insert(current);
+            return;
+        }
         visit[current] = true;
         for(auto child : G[current]){
-            if(!DFS(G,visit,child)) return false;
+            DFS(G,visit,child,ans);
         }
         visit[current] = false;
         G[current].clear();
-        return true;
+        ans.insert(current);
     }
 public:
-    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
         vector<int> G[numCourses];
         vector<bool> visit(numCourses,false);
+        set<int> ans;
         for(auto edge : prerequisites){
             int i = edge[0];
             int j = edge[1];
-            if(i==j) return false;
+            if(i==j) return vector<int>(0);
             G[i].push_back(j);
         }
-        if(prerequisites.size()<2) return true;
         for(int i=0;i<numCourses;i++){
-            if(!DFS(G,visit,i)) return false;
+            DFS(G,visit,i,ans);
         }
-        return true;
+        vector<int> res(ans.begin(),ans.end());
+        return res;
     }
 };
 

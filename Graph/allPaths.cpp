@@ -10,8 +10,7 @@ class Solution {
         }
         for(int child : G[current]){
             DFS(G,child,destination,visit,ans,path);
-        }
-        
+        } 
     }
 public:
     vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {

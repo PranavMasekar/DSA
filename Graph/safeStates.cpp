@@ -22,7 +22,6 @@ public:
                 ans.push_back(i);
             }
         }
-        // vector<int> res(ans.begin(),ans.end());
         return ans;
     }
 };
@@ -58,6 +57,32 @@ public:
                 ans.push_back(i);
             }
         }
+        return ans;
+    }
+};
+class Solution {
+public:
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        int n = graph.size();
+        vector<int> inDegree(n,0);
+        vector<int> outDegree(n,0);
+        vector<bool> visit(n,false);
+        int i = 0;
+        for(vector<int> edge : graph){
+            outDegree[i] = edge.size();
+            for(int val : edge){
+                inDegree[val]++;
+            }
+            i++;
+        }
+        vector<int> diff(n,0);
+        vector<int> ans;
+        for(int i=0;i<n;i++){
+            diff[i] = inDegree[i]-outDegree[i];
+            if(diff[i]>0) ans.push_back(i);
+            else if (inDegree[i]==0) ans.push_back(i);
+        }
+        sort(ans.begin(),ans.end());
         return ans;
     }
 };
