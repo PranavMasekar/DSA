@@ -1,8 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-// Find the inDegree of each node and compare each node with another 
-// if connected -1
 class Solution {
     int getMaxIndex(vector<int> degree,int index){
         int val = 0;

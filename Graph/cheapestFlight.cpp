@@ -1,40 +1,27 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-// Not solved
 const int INF = 1e9+10;
 class Solution {
 public:
     int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int ks) {
-        int distance[n][n];
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                if(i==j) distance[i][j] = 0;
-                else distance[i][j] = INF;
-            }
-        }
-        for(auto flight : flights){
-            int i = flight[0];
-            int j = flight[1];
-            int wt = flight[2];
-            distance[i][j] = wt;
-        }
-        for(int k=0;k<ks;k++){
-            for(int i=0;i<n;i++){
-                for(int j=0;j<n;j++){
-                    distance[i][j] = min(distance[i][j] , distance[i][k] + distance[k][j]);
+        vector<int> prices(n,INF);
+        prices[src] = 0;
+        for(int i=0;i<ks+1;i++){
+            vector<int> tempPrices(prices);
+            for(auto vec : flights){
+                int source = vec[0];
+                int destination = vec[1];
+                int weight = vec[2];
+                if(prices[source]==INF) continue;
+                if(prices[source] + weight < tempPrices[destination]){
+                    tempPrices[destination] = prices[source] + weight;
                 }
             }
+            prices = tempPrices;
         }
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                if(distance[i][j]==INF) cout<<"INF ";
-                else cout<<distance[i][j]<<" ";
-            }
-            cout<<endl;
-        }
-        if(distance[src][dst]==INF) return -1;
-        else return distance[src][dst];
+        if(prices[dst]==INF) return -1;
+        else return prices[dst];
     }
 };
 

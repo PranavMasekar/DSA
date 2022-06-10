@@ -2,40 +2,31 @@
 using namespace std;
 const int N = 1001;
 
-// TODO Not solved
 class Solution {
-    int inDegree[N];
-    void solution(vector<int> G[],vector<int>& temp,int current){
+    void solution(vector<int> G[],vector<vector<int>>& ans,int current,vector<bool> &visit,int previous){
+        visit[current] = true;
+        if(current!=previous) ans[current].push_back(previous);
         for(auto child : G[current]){
-            temp.push_back(child);
-            solution(G,temp,child);
+            if(visit[child]) continue;
+            solution(G,ans,child,visit,previous);
         }
     }
 public:
     vector<vector<int>> getAncestors(int n, vector<vector<int>>& edges) {
-        vector<int> G[N];
+        vector<int> G[n];
         for(auto edge:edges){
             int i = edge[0];
             int j = edge[1];
             G[i].push_back(j);
-            inDegree[j]++;
         }
-        vector<vector<int>> ans;
+        vector<vector<int>> ans(n);
         for(int i=0;i<n;i++){
-            vector<int> temp;
-            solution(G,temp,i);
-            sort(temp.begin(),temp.end());
-            ans.push_back(temp);
-            temp.clear();
+            vector<bool> visit(n,false);
+            solution(G,ans,i,visit,i);
         }
         return ans;
     }
 };
-
-/*
-    sadfsdff
-*/
-
 int main(){
     
     return 0;
