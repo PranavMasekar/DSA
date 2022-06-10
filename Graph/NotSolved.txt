@@ -1,4 +1,3 @@
 MaximumProbability
-MinHightTree (TLE)
 RemoveStones (TLE)
 SafeStates
