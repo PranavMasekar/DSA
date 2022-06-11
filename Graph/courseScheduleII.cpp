@@ -2,36 +2,32 @@
 using namespace std;
 
 class Solution {
-    void DFS(vector<int> G[],vector<bool>&visit,int current,set<int>&ans){
-        if(visit[current]) return;
-        if(G[current].empty()){
-            ans.insert(current);
-            return;
-        }
-        visit[current] = true;
-        for(auto child : G[current]){
-            DFS(G,visit,child,ans);
-        }
-        visit[current] = false;
-        G[current].clear();
-        ans.insert(current);
-    }
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
         vector<int> G[numCourses];
-        vector<bool> visit(numCourses,false);
-        set<int> ans;
+        vector<int> indegree(numCourses,0);
         for(auto edge : prerequisites){
             int i = edge[0];
             int j = edge[1];
-            if(i==j) return vector<int>(0);
-            G[i].push_back(j);
+            G[j].push_back(i);
+            indegree[i]++;
         }
+        queue<int> q;
         for(int i=0;i<numCourses;i++){
-            DFS(G,visit,i,ans);
+            if(indegree[i]==0) q.push(i);
         }
-        vector<int> res(ans.begin(),ans.end());
-        return res;
+        vector<int> result;
+        while(!q.empty()){
+            int val = q.front();
+            q.pop();
+            for(int child : G[val]){
+                indegree[child]--;
+                if(indegree[child]==0) q.push(child);
+            }
+            result.push_back(val);
+        }
+        if(result.size()!=numCourses) return {};
+        return result;
     }
 };
 
