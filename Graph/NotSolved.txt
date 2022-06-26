@@ -1,3 +1,3 @@
 RemoveStones (TLE)
 SafeStates
-Number of ways to reached destinatino with minimum cost
+Number of ways to reached destination with minimum cost
