@@ -56,7 +56,7 @@ int MinSubSetDifferenceDP(vector<int> &arr, int sum, int n)
         if (t[n][i] == true)
             ans.push_back(i);
     }
-    int minimum;
+    int minimum = INT_MAX;
     for (int i = 0; i < ans.size(); i++)
     {
         int temp = sum - (2 * ans[i]);
