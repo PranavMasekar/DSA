@@ -50,13 +50,16 @@ int LongestCommonSubsequenceDP(string x,string y,int n,int m){
 }
 
 int main(){
-    string x = "abcdgh";
-    string y = "abedfhr";
+    string x = "aggtab";
+    string y = "gxtxayb";
     int n = 6;
     int m = 7;
     memset(t,-1,sizeof(t));
-    cout<<LongestCommonSubsequenceMemo(x,y,n,m)<<endl;
-    cout<<LongestCommonSubsequenceRecursive(x,y,n,m)<<endl;
-    cout<<LongestCommonSubsequenceDP(x,y,n,m)<<endl;
+    int lengthOfLCS;
+    lengthOfLCS = LongestCommonSubsequenceMemo(x,y,n,m);
+    lengthOfLCS = LongestCommonSubsequenceRecursive(x,y,n,m);
+    lengthOfLCS = LongestCommonSubsequenceDP(x,y,n,m);
+    int ans = x.size() + y.size() - lengthOfLCS;
+    cout<<ans<<endl;
     return 0;
 }
