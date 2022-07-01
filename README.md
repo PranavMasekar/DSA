@@ -1,6 +1,6 @@
 # DSA Repository 
 
-## Topics Done- 
+## Topics Done - 
 * Binary Search
 * Bitwise Operators
 * LinkedList
